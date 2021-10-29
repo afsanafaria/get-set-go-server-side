@@ -76,6 +76,26 @@ async function run() {
             res.send(user);
         })
 
+        //delete user
+        app.delete('/users/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) }
+            const result = await userCollection.deleteOne(query);
+            res.send(result);
+        })
+
+        //query search
+        // app.get('/users', (req, res) => {
+        //     const search = (req.query.search)
+        //     if (search) {
+        //         const searchResult = users.filter(r => r.title.toLowerCase().includes(search))
+        //         res.send(searchResult)
+        //     }
+        //     else {
+        //         res.send(users)
+        //     }
+        // })
+
 
     } finally {
         //   await client.close();
