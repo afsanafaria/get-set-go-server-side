@@ -41,7 +41,7 @@ async function run() {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const service = await serviceCollection.findOne(query);
-            console.log("load user with id:", id)
+            console.log("load service with id:", id)
             res.send(service);
         })
         //delete api
