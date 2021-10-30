@@ -79,9 +79,25 @@ async function run() {
         //delete user
         app.delete('/users/:id', async (req, res) => {
             const id = req.params.id;
-            const query = { _id: ObjectId(id) }
+            const query = { _id: ObjectId(id) };
             const result = await userCollection.deleteOne(query);
+            console.log('delete this', id, result);
             res.send(result);
+        })
+        //  updated API
+        app.put('/users/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const updatedOrderStatus = req.body;
+            const updateDoc = {
+                $set: {
+                    satus: updatedOrderStatus.satus,
+
+                },
+            };
+            const result = await userCollection.updateOne(query, updateDoc);
+            console.log("updated this", result);
+            res.json(result)
         })
 
         //query search
